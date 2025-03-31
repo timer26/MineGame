@@ -18,18 +18,18 @@ def menu():
     range_x = 15
     menu = "MENU"
     generate_menu = [(menu+" "*(range_x-len(menu))+"|"),("-"*range_x)]
-    position_modifier = [range_x,len(generate_menu)]
+    # position_modifier = [range_x,len(generate_menu)]
     for key in menu_content:
         generate_menu.append(f"{key+" " * (range_x- len(key))+"|"}")
     ds.menu_storage =(generate_menu)
     range_y = len(ds.menu_storage)
     while (True):
-        print(range_x,range_y)
-        print(ds.position)
-        print(ds.vector)
-        user_input_handler(range_x, range_y )
         os.system('cls' if os.name == 'nt' else 'clear')
-        print(render_user(ds.menu_storage.copy(),position_modifier, ds.sprites["menu_cursor"]))
+        print(range_x,range_y," range ")
+        print(ds.position, " current position ")
+        print(ds.vector," vector ")
+        print(render_user(ds.menu_storage.copy(), ds.sprites["menu_cursor"]))
+        user_input_handler(range_x, range_y )
         time.sleep(0.1)
         
 
