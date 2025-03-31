@@ -1,30 +1,30 @@
 import keyboard
 import foo.data_storage as ds 
 
-def user_input_handler(range_x: int, range_y):
+def user_input_handler():
     user_input = keyboard.read_event().name.lower()
     if user_input in ["w", "up"]:
         ds.vector = [0, -1]
-        position_handler(range_x, range_y)
+        position_handler()
         return ds.vector
     elif user_input in ["s", "down"]:
         ds.vector = [0, 1]
-        position_handler(range_x, range_y)
+        position_handler()
         return ds.vector
     elif user_input in ["a", "left"]:
         ds.vector = [-1, 0]
-        position_handler(range_x, range_y)
+        position_handler()
         return ds.vector
     elif user_input in ["d", "right"]:
         ds.vector = [1, 0]
-        position_handler(range_x, range_y)
+        position_handler()
         return ds.vector
     elif user_input == "enter":
         return ["enter", 1]
     elif user_input == ["esc", "back"]:
         return ["esc", 1]
 
-def position_handler(range_x: int, range_y: int) -> list:
+def position_handler() -> list:
 
     x, y = ds.position
     x += ds.vector[0]  
@@ -36,5 +36,5 @@ def position_handler(range_x: int, range_y: int) -> list:
     
     return ds.position
 
-def force_position_handler(forced_position:list) -> list:
+def forced_position_handler(forced_position:list) -> list:
     ds.position = forced_position[0], forced_position[1]

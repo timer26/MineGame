@@ -6,12 +6,12 @@ position_modifier = {
     "x_max": 0,         # right boundary
     "y_min": 0,         # top boundary
     "y_max": 0,         # bottom boundary
-    # "x_start": 0,       # force X starting position
-    # "y_start": 0,       # force Y starting position
+    "x_start": 0,       # force X starting position
+    "y_start": 0,       # force Y starting position
 }
 
 
-menu_storage = []
+rendered_area = []
 
 sprites = {"menu_cursor": " <--"}
 

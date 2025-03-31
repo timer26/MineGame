@@ -1,5 +1,5 @@
 from foo.data_storage import vector, position
-from .input_heandler import user_input_handler, position_handler, force_position_handler
+from .input_heandler import user_input_handler, position_handler, forced_position_handler
 
     
 
