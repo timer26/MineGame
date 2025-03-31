@@ -30,7 +30,7 @@ def position_handler() -> list:
     x += ds.vector[0]  
     y += ds.vector[1]
     x = max(ds.position_modifier["x_min"], min(x, ds.position_modifier["x_max"]))
-    y = max(ds.position_modifier["y_min"], min(y, ds.position_modifier["y_max"]))
+    y = max(ds.position_modifier["y_min"], min(y, (ds.position_modifier["y_max"])-1))
 
     ds.position = [x, y]  
     
