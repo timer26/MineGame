@@ -28,10 +28,13 @@ def position_handler(range_x: int, range_y: int) -> list:
 
     x, y = ds.position
     x += ds.vector[0]  
-    y += ds.vector[1]  
-    x = max(0, min(x, range_x-1))  
-    y = max(0, min(y, range_y-1)) 
+    y += ds.vector[1]
+    x = max(ds.position_modifier["x_min"], min(x, ds.position_modifier["x_max"]))
+    y = max(ds.position_modifier["y_min"], min(y, ds.position_modifier["y_max"]))
 
     ds.position = [x, y]  
     
     return ds.position
+
+def force_position_handler(forced_position:list) -> list:
+    ds.position = forced_position[0], forced_position[1]
