@@ -44,14 +44,13 @@ def menu():
     forced_position_handler([spaceing,top_restriction])
     menu_option = list(menu_content.items())
     while True:
-        # os.system('cls' if os.name == 'nt' else 'clear')
+        os.system('cls' if os.name == 'nt' else 'clear')
         print(spaceing,range_y," range ")
         print(ds.position, " current position ")
         print(ds.vector, " vector ")
         print(render_user(ds.rendered_area.copy(), ds.sprites["menu_cursor"]))
         result = user_input_handler()
-        if result[0] == "enter" and result[1] == 1:
-            print(menu_option[0][(ds.position[1]) - (top_restriction)])
+       
         print("-------------------------------")
             
 menu()
