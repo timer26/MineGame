@@ -1,57 +1,15 @@
-# Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]
-*$py.class
-
-# C extensions
-*.so
-
-# Virtual environment
+*.pyo
+.Python
+*.db
+*.sqlite3
+.env
 .venv/
-venv/
-ENV/
 env/
-# If the venv is stored somewhere else
-*.venv/
-
-# VS Code
-.vscode/
-
-# PyCharm / IntelliJ
-.idea/
-
-# Jupyter Notebook checkpoints
-.ipynb_checkpoints
-
-# Test / coverage
-.tox/
-.nox/
-.coverage
-.coverage.*
-.cache
-nosetests.xml
-coverage.xml
-*.cover
-.hypothesis/
-.pytest_cache/
-
-# MyPy
+venv/
+*.egg-info/
 .mypy_cache/
-
-# PyInstaller
-*.manifest
-*.spec
-
-# Installer logs
-pip-log.txt
-pip-delete-this-directory.txt
-
-# Unit test / mock data
-test_output/
-tests/__pycache__/
-
-# macOS
-.DS_Store
-
-# Others
-Untitled
+.pytest_cache/
+.idea/
+*.log
