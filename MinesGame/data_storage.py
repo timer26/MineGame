@@ -1,7 +1,8 @@
-
+from MinesGame.menu import *
 class DataStorage:
     def __init__(self):
         self._vector = [0, 0]
+        self._position_2D = [0, 0]
         self._rendered_area = []
         
         
@@ -13,18 +14,12 @@ class DataStorage:
                 "x_start": 0,       # force X starting position
                 "y_start": 0,       # force Y starting position
                                  }
-        self._position_2D = [0, 0]
         
-        
-        self._menu_position = [0, 0]
-        self._last_menu_position = [0, 0]
-        self._all_menu_functions = { 
-                "main_menu": [0, 0],
-                "start_game": [1, 0],
-                "difficulty": [2, 0],
-                "settings": [3, 0],
-                "quit": [4, 0],
-                                    }
+   
+              
+        self._menu_position = ""
+        self._last_menu_position = []
+        self._all_menu_functions = {}
         
         
         self._sprites = {
@@ -48,40 +43,40 @@ class DataStorage:
     
     def get_menu_position(self):
         return self._menu_position
-    
+
     def get_last_menu_position(self):
-        return self._last_menu_position
+        if self._last_menu_position:
+            return self._last_menu_position.pop(-1)
+
 
     def get_all_menu_functions(self):
         return self._all_menu_functions
 
     def get_sprites(self):
         return self._sprites
+    
+    
     #########- setters -##############
-    def set_vector(self, value):
+    def set_vector(self, value: list[int,int]) -> None:
         self._vector = value
-        
-    def set_rendered_area(self, value):
+
+    def set_rendered_area(self, value: list[str]) -> None:
         self._rendered_area = value
 
-    def set_position_modifier(self, value):
+    def set_position_modifier(self, value: dict[str, int]) -> None:
         self._position_modifier = value
 
-    def set_position_2D(self, value):
+    def set_position_2D(self, value: list[int,int]) -> None:
         self._position_2D = value
 
-    def set_menu_position(self, value):
+    def set_menu_position(self, value:str) -> None:
         self._menu_position = value
 
-    def set_last_menu_position(self, value):
-        self._last_menu_position = value
+    def set_last_menu_position(self, value: str) -> None:
+        self._last_menu_position.append(value)
 
-    def set_all_menu_functions(self, value):
+    def set_all_menu_functions(self, value: dict[str, callable]) -> None:
         self._all_menu_functions = value
-
-    def set_sprites(self, value):
-        self._sprites = value
-
     def metric_analyse(self):
         return "Metric: Placeholder"
 

@@ -1,5 +1,7 @@
-from modules import *
+import time
 
+from modules import *
+from MinesGame.data_storage import data
 from pynput import keyboard
 
 def user_input_handler() -> str:
@@ -11,7 +13,7 @@ def user_input_handler() -> str:
         except AttributeError:
             k = key.name  # Handle special keys like "enter", "esc", etc.
 
-        valid_keys = {"w", "a", "s", "d", "up", "down", "left", "right", "enter", "esc", "back"}
+        valid_keys = {"w", "a", "s", "d", "up", "down", "left", "right", "enter", "esc", "backspace"}
         if k in valid_keys:
             pressed_key.append(k)
             return False  # Stop the listener
@@ -43,7 +45,7 @@ def user_input_handler() -> str:
         case "esc":
             return ["esc", -1]
         case "back":
-            return ["back", -1]
+            return ["backspace", -1]
         case _:
             return None  # Fallback in case of unexpected input
 
@@ -65,23 +67,22 @@ def forced_position_handler(forced_position: list) -> list:
     return data.get_position_2D()
 
 def menu_handler(menu_content: list):
-    position = data.get_position_2D()
-    modifier = data.get_position_modifier()
-    selected_index = position[1] - modifier["y_start"]  # Convert position to menu index
-
+    data.set_vector([0, 0])
+    selected_option = data.get_position_2D()[1] - data.get_position_modifier()["y_start"]
     result = user_input_handler()
+
+    selected_key = menu_content[selected_option]
+
     if result[0] == "enter":
-        data.set_last_menu_position(data.get_menu_position().copy())
-        selected_key = menu_content[selected_index]
-        data.set_menu_position(data.get_all_menu_functions()[selected_key])
+        data.set_last_menu_position(data.get_menu_position()) 
+        data.set_menu_position(selected_key)
+        data.get_all_menu_functions()[selected_key]()
 
-    elif result[0] in ["esc", "back"]:
-        menu_position = data.get_menu_position()
-        if result[0] == "esc":
-            menu_position = [0, 0]
-        else:
-            menu_position[1] = max(0, menu_position[1] + result[1])
-        data.set_menu_position(menu_position)
-        data.set_last_menu_position(menu_position.copy())
+    elif result[0] == "esc":
+        data.set_menu_position("main_menu")
+        data.get_all_menu_functions()["main_menu"]()
 
-    return menu_content[selected_index]
+    elif result[0] == "backspace":
+        data.get_all_menu_functions()["back"]()
+
+    return selected_key
