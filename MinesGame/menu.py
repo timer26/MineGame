@@ -46,7 +46,7 @@ def main_menu():
     ###############################################################
     while True:
         final_render("menu_cursor")
-        print(menu_handler(menu_content))
+        menu_handler(menu_content)
 
 
 ###########################################

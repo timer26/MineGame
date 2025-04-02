@@ -24,6 +24,7 @@ def user_input_handler()->str:
 
     match user_input:
         case "w" | "up":
+            data.set
             data.vector = [0, -1]
             position_handler()
             return data.vector
