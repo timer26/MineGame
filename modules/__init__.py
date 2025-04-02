@@ -1,7 +1,24 @@
-from MinesGame.data_storage import data
-from .handlers import user_input_handler, position_handler, forced_position_handler, menu_handler
+from .handlers import (
+    user_input_handler,
+    position_handler,
+    forced_position_handler,
+    menu_handler,
+)
 
+from .render import (
+    render_menu,
+    render_user,
+    final_render,
+)
 
-    
-
-__all__ = ["vector", "handlers", "position_2D", forced_position_handler, menu_handler, user_input_handler, position_handler, ]
+from .data_storage import data
+__all__ = [
+        "forced_position_handler",
+        "menu_handler",
+        "user_input_handler",
+        "position_handler",
+        "data",
+        "render_menu",
+        "render_user",
+        "final_render",
+]

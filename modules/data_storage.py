@@ -83,7 +83,7 @@ class DataStorage:
         self._sprites = value
 
     def metric_analyse(self):
-        return "Metric: Placeholder"  # Stub function
+        return "Metric: Placeholder"
 
-# Singleton instance
+
 data = DataStorage()

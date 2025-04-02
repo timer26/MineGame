@@ -1,4 +1,5 @@
-from MinesGame.menu import main_menu
+from MinesGame import main_menu
+
 
 
 main_menu()

@@ -1,6 +1,4 @@
-import MinesGame.data_storage as data
-from modules.render import render_menu, final_render
-from modules.handlers import menu_handler
+from modules import data, render_menu, menu_handler,final_render
 # Global dictionary storing functions and their positions
 
 
@@ -21,7 +19,7 @@ def settings():
     print("settings")
     data.vector.clear()
     pass
-def quit():
+def end_game():
     exit()
 
 
@@ -51,4 +49,3 @@ def main_menu():
 
 ###########################################
 # Start the game menu
-main_menu()

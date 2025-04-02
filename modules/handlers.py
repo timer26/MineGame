@@ -1,9 +1,8 @@
-import MinesGame.data_storage as data
-
+from modules import *
 
 from pynput import keyboard
 
-def user_input_handler()->str:
+def user_input_handler() -> str:
     pressed_key = []
 
     def on_press(key):
@@ -24,22 +23,21 @@ def user_input_handler()->str:
 
     match user_input:
         case "w" | "up":
-            data.set
-            data.vector = [0, -1]
+            data.set_vector([0, -1])
             position_handler()
-            return data.vector
+            return data.get_vector()
         case "s" | "down":
-            data.vector = [0, 1]
+            data.set_vector([0, 1])
             position_handler()
-            return data.vector
+            return data.get_vector()
         case "a" | "left":
-            data.vector = [-1, 0]
+            data.set_vector([-1, 0])
             position_handler()
-            return data.vector
+            return data.get_vector()
         case "d" | "right":
-            data.vector = [1, 0]
+            data.set_vector([1, 0])
             position_handler()
-            return data.vector
+            return data.get_vector()
         case "enter":
             return ["enter", 1]
         case "esc":
@@ -49,42 +47,41 @@ def user_input_handler()->str:
         case _:
             return None  # Fallback in case of unexpected input
 
-
 def position_handler() -> list:
-    x, y = data.position_2D
-    dx, dy = data.vector
+    x, y = data.get_position_2D()
+    dx, dy = data.get_vector()
     x += dx
     y += dy
 
-    x = max(data.position_modifier["x_min"], min(x, data.position_modifier["x_max"]))
-    y = max(data.position_modifier["y_min"], min(y, data.position_modifier["y_max"] - 1))
+    modifier = data.get_position_modifier()
+    x = max(modifier["x_min"], min(x, modifier["x_max"]))
+    y = max(modifier["y_min"], min(y, modifier["y_max"] - 1))
 
-    data.position_2D = [x, y]
-    return data.position_2D
-
+    data.set_position_2D([x, y])
+    return data.get_position_2D()
 
 def forced_position_handler(forced_position: list) -> list:
-    data.position_2D = list(forced_position)
-    return data.position_2D
+    data.set_position_2D(list(forced_position))
+    return data.get_position_2D()
 
 def menu_handler(menu_content: list):
-    
-    selected_index = data.position_2D[1] - data.position_modifier["y_start"]  # Convert position to menu index
+    position = data.get_position_2D()
+    modifier = data.get_position_modifier()
+    selected_index = position[1] - modifier["y_start"]  # Convert position to menu index
+
     result = user_input_handler()
     if result[0] == "enter":
-        data.last_menu_position = data.menu_position.copy()
+        data.set_last_menu_position(data.get_menu_position().copy())
         selected_key = menu_content[selected_index]
-        data.menu_position = data.all_menu_functions[selected_key]
+        data.set_menu_position(data.get_all_menu_functions()[selected_key])
 
-    
     elif result[0] in ["esc", "back"]:
-        if result[0]   == "esc":
-            data.menu_position = [0,0]
+        menu_position = data.get_menu_position()
+        if result[0] == "esc":
+            menu_position = [0, 0]
         else:
-            data.menu_position[1] = max(0, data.menu_position[1] + result[1])
-        data.last_menu_position = data.menu_position.copy()
+            menu_position[1] = max(0, menu_position[1] + result[1])
+        data.set_menu_position(menu_position)
+        data.set_last_menu_position(menu_position.copy())
 
     return menu_content[selected_index]
-        
-        
-   
