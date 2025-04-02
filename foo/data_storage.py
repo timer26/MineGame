@@ -20,6 +20,7 @@ all_menu_functions = {
         "quit": [4, 0],
 }
 menu_position = [0, 0]
+last_menu_position = [0, 0]
 ############################################
 # render storage ---> stores API
 rendered_area = []
@@ -27,3 +28,8 @@ rendered_area = []
 # all sprite distionary
 sprites = {"menu_cursor": " <--"}
 
+def metric_analyse():
+     print("vector: ", vector)
+     print("position_2D: ", position_2D)
+     print("menu_position: ", menu_position)
+     print("last_menu_position: ", last_menu_position)

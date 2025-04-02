@@ -1,14 +1,8 @@
+from wave import Wave_write
+
 from pynput import keyboard
 import foo.data_storage as data
 
-
-from foo import vector, position_2D, menu_position
-
-
-def metris():
-    print(vector)
-    print(position_2D)
-    print(menu_position)
 def user_input_handler()->str:
     pressed_key = []
 
@@ -47,8 +41,10 @@ def user_input_handler()->str:
             return data.vector
         case "enter":
             return ["enter", 1]
-        case "esc" | "back":
-            return ["esc", 1]
+        case "esc":
+            return ["esc", -1]
+        case "back":
+            return ["back", -1]
         case _:
             return None  # Fallback in case of unexpected input
 
@@ -70,17 +66,24 @@ def forced_position_handler(forced_position: list) -> list:
     data.position_2D = list(forced_position)
     return data.position_2D
 
-def menu_handler(menu_content: dict, top_restriction: int):
-    selected_index = data.position_2D[1] - top_restriction  # Convert position to menu index
-    menu_keys = list(menu_content.keys())  # Get list of menu keys
-    while True:
-        print(metris())
-        
-        result = user_input_handler()
-        if result[0] == "enter" or result[0] == "close":
-            selected_key = menu_keys[selected_index]
-            return menu_content[selected_key]
-        
+def menu_handler(menu_content: list):
     
+    selected_index = data.position_2D[1] - data.position_modifier["y_start"]  # Convert position to menu index
+    result = user_input_handler()
+    if result[0] == "enter":
+        data.last_menu_position = data.menu_position.copy()
+        selected_key = menu_content[selected_index]
+        data.menu_position = data.all_menu_functions[selected_key]
 
+    
+    elif result[0] in ["esc", "back"]:
+        if result[0]   == "esc":
+            data.menu_position = [0,0]
+        else:
+            data.menu_position[1] = max(0, data.menu_position[1] + result[1])
+        data.last_menu_position = data.menu_position.copy()
 
+    return menu_content[selected_index]
+        
+        
+   

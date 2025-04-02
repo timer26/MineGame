@@ -1,6 +1,6 @@
 import foo.data_storage as data
 from foo.handlers import menu_handler
-from foo.render import render_menu, render_user
+from foo.render import render_menu, final_render
 
 # Global dictionary storing functions and their positions
 
@@ -9,61 +9,46 @@ from foo.render import render_menu, render_user
 
     
 def start_game():
+    print("Welcome to Mine Game!")
     data.vector.clear()
-    print("Welcome to Mine Game")
-    input("Press Enter to return to main menu...")
-    main_menu()  # Return to the main menu after execution
+    pass
 
 def difficulty():
+    print("deffulty")
     data.vector.clear()
-    menu_content = {
-            "start": "start_game",
-            "difficulty": "difficulty",
-            "settings": "settings",
-            "close": "quit",
-    }
-
-    spacing = 15
-    name_of_section = "MAIN MENU"
-    top_restriction = render_menu(spacing, name_of_section, menu_content)
-    menu_handler (menu_content, top_restriction)
+    pass    
 
 def settings():
+    print("settings")
     data.vector.clear()
-    menu_content = {
-            "start": "start_game",
-            "difficulty": "difficulty",
-            "settings": "settings",
-            "close": "quit",
-    }
-
-    spacing = 15
-    name_of_section = "MAIN MENU"
-    top_restriction = render_menu(spacing, name_of_section, menu_content)
-    menu_handler (menu_content, top_restriction)
-
+    pass
 def quit():
-    data.vector.clear()
+    exit()
     
 
 def main_menu():
-    data.menu_position = data.all_menu_functions["main_menu"]
-    
-    data.vector.clear()
-    # initiation of menu API
-    menu_content = {
-            "start": "start_game",
-            "difficulty": "difficulty",
-            "settings": "settings",
-            "close": "quit",
-    }
 
+    #####################---START OF MENU INITIATION---###############
+    # initiation of menu API
+    menu_content = [
+            "start_game",
+            "difficulty",
+            "settings",
+            "quit",
+    ]
 
     spacing = 15
     name_of_section = "MAIN MENU"
-    top_restriction = render_menu(spacing, name_of_section, menu_content)
-    
-    menu_handler (menu_content, top_restriction)
+    render_menu(spacing, name_of_section, menu_content)
+    #####################---END OF MENU INITIATION---###############
+
+    ########################---CODE SEGMENT---######################
+
+    ###############################################################
+    while True:
+        final_render("menu_cursor")
+        print(menu_handler(menu_content))
+        
 
 ###########################################
 # Start the game menu
