@@ -1,56 +1,55 @@
-import foo.data_storage as ds
-# from foo.render import render
-from foo import user_input_handler,forced_position_handler
-import time
-import os
-from foo.render import render_user
+import foo.data_storage as data
+from foo.handlers import menu_handler
+from foo.render import render_menu, final_render
+
+# Global dictionary storing functions and their positions
 
 
-def menu():
-    def start_game():
-        print("Welcome to Mine Game")
-        pass
-    def difficulty():
-        
-        pass
-    def settings():
-        pass
-    def close():
-        pass
-    menu_content = {"start":start_game(),
-                    "difficulty":difficulty(),
-                    "settings":settings(),
-                    "close":close()
-                    }
-    print(len(menu_content))
-    spaceing = 15
-    menu = "MENU"
-    generate_menu = [(menu+" "*(spaceing-len(menu))+"|"),("-"*spaceing)]
-    top_restriction = len(generate_menu)
-#generate initial menu
-    for key in menu_content:
-        generate_menu.append(f"{key+" " * (spaceing- len(key))+"|"}")
-        
-    ds.rendered_area =(generate_menu)
-    range_y = len(ds.rendered_area)
-    ds.position_modifier = {
-        "x_min": spaceing,                              # Left boundary
-        "x_max": spaceing,                              # Right boundary
-        "y_min": top_restriction,                       # Top boundary
-        "y_max": range_y,                               # Bottom boundary
-        "x_start": spaceing,                            # force X starting position
-        "y_start": top_restriction,                     # force Y starting position
-    }
-    forced_position_handler([spaceing,top_restriction])
-    menu_option = list(menu_content.items())
+
+
+    
+def start_game():
+    print("Welcome to Mine Game!")
+    data.vector.clear()
+    pass
+
+def difficulty():
+    print("deffulty")
+    data.vector.clear()
+    pass    
+
+def settings():
+    print("settings")
+    data.vector.clear()
+    pass
+def quit():
+    exit()
+    
+
+def main_menu():
+
+    #####################---START OF MENU INITIATION---###############
+    # initiation of menu API
+    menu_content = [
+            "start_game",
+            "difficulty",
+            "settings",
+            "quit",
+    ]
+
+    spacing = 15
+    name_of_section = "MAIN MENU"
+    render_menu(spacing, name_of_section, menu_content)
+    #####################---END OF MENU INITIATION---###############
+
+    ########################---CODE SEGMENT---######################
+
+    ###############################################################
     while True:
-        os.system('cls' if os.name == 'nt' else 'clear')
-        print(spaceing,range_y," range ")
-        print(ds.position, " current position ")
-        print(ds.vector, " vector ")
-        print(render_user(ds.rendered_area.copy(), ds.sprites["menu_cursor"]))
-        result = user_input_handler()
-       
-        print("-------------------------------")
-            
-menu()
+        final_render("menu_cursor")
+        print(menu_handler(menu_content))
+        
+
+###########################################
+# Start the game menu
+main_menu()
