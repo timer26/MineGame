@@ -28,17 +28,19 @@ class DataStorage:
 
 
 
-        self._metric_data =   [
+        self._metric_data =   []
+
+
+    def _generate_default_metric_data(self):
+        return [
                 {"Current vector 2D": self._vector},
                 {"Current position 2D": self._position_2D},
                 {"Maximum X , Y": (self._position_modifier["x_max"], self._position_modifier["y_max"])},
                 {"Minimum X , Y": (self._position_modifier["x_min"], self._position_modifier["y_min"])},
                 {"Forced X , Y":  (self._position_modifier["x_start"], self._position_modifier["y_start"])},
         ]
-
-    
-
-
+    def clear_metric_data(self):
+        self._metric_data = self._generate_default_metric_data()
 
 
 
@@ -70,8 +72,9 @@ class DataStorage:
     def get_sprites(self)->str:
         return self._sprites
     def get_metric_data(self)->list[dict]:
+        if len(self._metric_data) > 6:
+            self._metric_data.pop(-1)
         return self._metric_data
-    
     #########- setters -##############
     def set_vector(self, value: list[int,int]) -> None:
         self._vector = value

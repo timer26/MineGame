@@ -37,10 +37,10 @@ def render_user(render_object: list, sprite: str):
         
        
 
-metric_offset = 10
-def final_render_work_in_progress(sprite: str):
+# metric data need switch from settings
+def final_render(sprite: str):
         clear_console()
-
+        metric_offset = 10
         rendered_lines = data.get_rendered_area().copy()
         rendered_with_cursor = render_user(rendered_lines, data.get_sprites()[sprite])
 
@@ -48,29 +48,17 @@ def final_render_work_in_progress(sprite: str):
         max_lines = max(len(rendered_with_cursor), len(metric_data))
 
         for i in range(max_lines):
-                spcing_border = metric_offset + (len(rendered_with_cursor[i]) - len(data.get_position_modifier()["x_max"]))
-                line = rendered_with_cursor[i] if i < len(rendered_with_cursor) else " " * len(rendered_with_cursor[0])
-                metric = metric_data[i] if i < len(metric_data) else {}
+                line = rendered_with_cursor[i] if i < len(rendered_with_cursor) else ""
 
-                metric_str = f"{list(metric.items())[0][0]} : {list(metric.items())[0][1]}" if metric else ""
-                print(f"{line}   |   {metric_str}")
+                if i < len(metric_data):
+                        metric_dict = metric_data[i]
+                        key, value = list(metric_dict.items())[0]
+                        metric = f"{key} : {value}"
+                else:
+                        metric = ""
 
-        print(f"\nLines rendered: {len(rendered_with_cursor)} | Metrics shown: {len(metric_data)}")
 
-def final_render(sprite: str):
-        clear_console()
-
-        rendered_lines = data.get_rendered_area().copy()
-        rendered_with_cursor = render_user(rendered_lines, data.get_sprites()[sprite])
-
-        metric_offset = 10
-        metric_data = data.get_metric_data()
-
-        for line in rendered_lines:
-                line_len = len(line) + data.get_position_modifier()["x_max"]
-                x_max = data.get_position_modifier()["x_max"]
-                plus_count = x_max + max(0, metric_offset - line_len + len(metric_data))
-
-                print(line + " " + "+" * plus_count)
-
-        print(f"\nLines rendered: {len(rendered_with_cursor)}")
+                padded_line = line.ljust(data.get_position_modifier()["x_max"]+metric_offset)
+                print(f"{padded_line}{"||- "}{metric}")
+            
+        data.clear_metric_data()
