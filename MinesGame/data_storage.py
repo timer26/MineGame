@@ -19,7 +19,7 @@ class DataStorage:
    
               
         self._menu_position = ""
-        self._last_menu_position: deque[str] = deque()
+        self._last_menu_position = deque()
         self._all_menu_functions = {}
         
         
@@ -79,10 +79,8 @@ class DataStorage:
         return self._sprites
     
     def get_metric_data(self)->list[dict]:
-        if len(self._metric_data) > 6:
-            self._metric_data.pop(-1)
-            
         return self._metric_data
+            
     #########- setters -##############
     def set_vector(self, value: list[int,int]) -> None:
         self._vector = value

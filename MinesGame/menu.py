@@ -94,4 +94,5 @@ data.set_all_menu_functions({
         "easy": difficulty_setter,
         "medium": difficulty_setter,
         "hard": difficulty_setter,
+        # "metrics_analyze"metrics_analyze,
 })
