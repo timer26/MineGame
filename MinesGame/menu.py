@@ -48,11 +48,8 @@ def difficulty():
     run_menu(menu_content, spacing, name_of_section)
 def settings():
     menu_content = [
-            "start_game",
-            "difficulty",
-            "settings",
-            "end_game",
-            "back",
+            "metrics_analyze",
+            # "size_of_game",   
     ]
 
     spacing = 15
@@ -89,5 +86,5 @@ data.set_all_menu_functions({
         "difficulty": difficulty,
         "settings": settings,
         "end_game": end_game,
-        "back": back,
+        "back": back
 })

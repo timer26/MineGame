@@ -22,32 +22,33 @@ def user_input_handler() -> str:
         listener.join()
 
     user_input = pressed_key[0]
-
-    match user_input:
-        case "w" | "up":
-            data.set_vector([0, -1])
-            position_handler()
-            return data.get_vector()
-        case "s" | "down":
-            data.set_vector([0, 1])
-            position_handler()
-            return data.get_vector()
-        case "a" | "left":
-            data.set_vector([-1, 0])
-            position_handler()
-            return data.get_vector()
-        case "d" | "right":
-            data.set_vector([1, 0])
-            position_handler()
-            return data.get_vector()
-        case "enter":
-            return ["enter", 1]
-        case "esc":
-            return ["esc", -1]
-        case "back":
-            return ["backspace", -1]
-        case _:
-            return None  # Fallback in case of unexpected input
+    
+    data.set_metric_data({"Latest key pressed": pressed_key})   #sending data to metric storage
+    
+    if user_input in ("w", "up"):
+        data.set_vector([0, -1])
+        position_handler()
+        return data.get_vector()
+    elif user_input in ("s", "down"):
+        data.set_vector([0, 1])
+        position_handler()
+        return data.get_vector()
+    elif user_input in ("a", "left"):
+        data.set_vector([-1, 0])
+        position_handler()
+        return data.get_vector()
+    elif user_input in ("d", "right"):
+        data.set_vector([1, 0])
+        position_handler()
+        return data.get_vector()
+    elif user_input == "enter":
+        return "enter"
+    elif user_input == "esc":
+        return "esc"
+    elif user_input == "back":
+        return "backspace"
+    else:
+        return None  # Fallback in case of unexpected input
 
 def position_handler() -> list:
     x, y = data.get_position_2D()
@@ -72,17 +73,19 @@ def menu_handler(menu_content: list):
     result = user_input_handler()
 
     selected_key = menu_content[selected_option]
-
-    if result[0] == "enter":
+    data.set_metric_data({"Last menu position": data.get_last_menu_position()})
+    data.set_metric_data({"Last menu position": data.get_menu_position()})
+    
+    if result == "enter":
         data.set_last_menu_position(data.get_menu_position()) 
         data.set_menu_position(selected_key)
         data.get_all_menu_functions()[selected_key]()
 
-    elif result[0] == "esc":
+    elif result == "esc":
         data.set_menu_position("main_menu")
         data.get_all_menu_functions()["main_menu"]()
 
-    elif result[0] == "backspace":
+    elif result == "backspace":
         data.get_all_menu_functions()["back"]()
 
     return selected_key

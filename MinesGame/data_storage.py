@@ -18,13 +18,27 @@ class DataStorage:
    
               
         self._menu_position = ""
-        self._last_menu_position = []
+        self._last_menu_position: list[str] = []
         self._all_menu_functions = {}
         
         
         self._sprites = {
                 "menu_cursor": " <--"
         }
+
+
+
+        self._metric_data =   [
+                {"Current vector 2D": self._vector},
+                {"Current position 2D": self._position_2D},
+                {"Maximum X , Y": (self._position_modifier["x_max"], self._position_modifier["y_max"])},
+                {"Minimum X , Y": (self._position_modifier["x_min"], self._position_modifier["y_min"])},
+                {"Forced X , Y":  (self._position_modifier["x_start"], self._position_modifier["y_start"])},
+        ]
+
+    
+
+
 
 
 
@@ -44,17 +58,19 @@ class DataStorage:
     def get_menu_position(self):
         return self._menu_position
 
-    def get_last_menu_position(self):
+    def get_last_menu_position(self) -> str:
         if self._last_menu_position:
-            return self._last_menu_position.pop(-1)
+            return self._last_menu_position.pop()
+        return "main_menu"  # fallback if empty
 
 
     def get_all_menu_functions(self):
         return self._all_menu_functions
 
-    def get_sprites(self):
+    def get_sprites(self)->str:
         return self._sprites
-    
+    def get_metric_data(self)->list[dict]:
+        return self._metric_data
     
     #########- setters -##############
     def set_vector(self, value: list[int,int]) -> None:
@@ -77,8 +93,8 @@ class DataStorage:
 
     def set_all_menu_functions(self, value: dict[str, callable]) -> None:
         self._all_menu_functions = value
-    def metric_analyse(self):
-        return "Metric: Placeholder"
 
-
+    def set_metric_data(self, value: dict[str, any]) -> None:
+        self._metric_data.append(value)
+        
 data = DataStorage()

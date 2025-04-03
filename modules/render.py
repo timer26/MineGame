@@ -32,15 +32,45 @@ def render_user(render_object: list, sprite: str):
         line = list(line)
         line[position_2D[0]] = sprite
         render_object[position_2D[1]] = ''.join(line)
-        return "\n".join(render_object)
+        return render_object
+      
+        
+       
 
-def render_matric():
+metric_offset = 10
+def final_render_work_in_progress(sprite: str):
+        clear_console()
 
-        data.get_vector()       
+        rendered_lines = data.get_rendered_area().copy()
+        rendered_with_cursor = render_user(rendered_lines, data.get_sprites()[sprite])
 
+        metric_data = data.get_metric_data()
+        max_lines = max(len(rendered_with_cursor), len(metric_data))
+
+        for i in range(max_lines):
+                spcing_border = metric_offset + (len(rendered_with_cursor[i]) - len(data.get_position_modifier()["x_max"]))
+                line = rendered_with_cursor[i] if i < len(rendered_with_cursor) else " " * len(rendered_with_cursor[0])
+                metric = metric_data[i] if i < len(metric_data) else {}
+
+                metric_str = f"{list(metric.items())[0][0]} : {list(metric.items())[0][1]}" if metric else ""
+                print(f"{line}   |   {metric_str}")
+
+        print(f"\nLines rendered: {len(rendered_with_cursor)} | Metrics shown: {len(metric_data)}")
 
 def final_render(sprite: str):
         clear_console()
-        print(data.get_menu_position())
-        print(data.get_last_menu_position())
-        print(render_user(data.get_rendered_area().copy(), data.get_sprites()[sprite]))
+
+        rendered_lines = data.get_rendered_area().copy()
+        rendered_with_cursor = render_user(rendered_lines, data.get_sprites()[sprite])
+
+        metric_offset = 10
+        metric_data = data.get_metric_data()
+
+        for line in rendered_lines:
+                line_len = len(line) + data.get_position_modifier()["x_max"]
+                x_max = data.get_position_modifier()["x_max"]
+                plus_count = x_max + max(0, metric_offset - line_len + len(metric_data))
+
+                print(line + " " + "+" * plus_count)
+
+        print(f"\nLines rendered: {len(rendered_with_cursor)}")
