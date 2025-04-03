@@ -1,4 +1,5 @@
 from MinesGame.menu import *
+from collections import  deque
 class DataStorage:
     def __init__(self):
         self._vector = [0, 0]
@@ -18,12 +19,13 @@ class DataStorage:
    
               
         self._menu_position = ""
-        self._last_menu_position: list[str] = []
+        self._last_menu_position: deque[str] = deque()
         self._all_menu_functions = {}
         
         
         self._sprites = {
-                "menu_cursor": " <--"
+                "menu_cursor": " <--",
+                "mine" : "Ø",
         }
 
 
@@ -35,8 +37,8 @@ class DataStorage:
         return [
                 {"Current vector 2D": self._vector},
                 {"Current position 2D": self._position_2D},
-                {"Maximum X , Y": (self._position_modifier["x_max"], self._position_modifier["y_max"])},
                 {"Minimum X , Y": (self._position_modifier["x_min"], self._position_modifier["y_min"])},
+                {"Maximum X , Y": (self._position_modifier["x_max"], self._position_modifier["y_max"])},
                 {"Forced X , Y":  (self._position_modifier["x_start"], self._position_modifier["y_start"])},
         ]
     def clear_metric_data(self):
@@ -63,17 +65,23 @@ class DataStorage:
     def get_last_menu_position(self) -> str:
         if self._last_menu_position:
             return self._last_menu_position.pop()
-        return "main_menu"  # fallback if empty
+        return "main_menu"
 
-
+    def peek_last_menu_position(self) -> str:
+        if self._last_menu_position:
+            return self._last_menu_position[-1]
+        return "main_menu"  
+    
     def get_all_menu_functions(self):
         return self._all_menu_functions
 
     def get_sprites(self)->str:
         return self._sprites
+    
     def get_metric_data(self)->list[dict]:
         if len(self._metric_data) > 6:
             self._metric_data.pop(-1)
+            
         return self._metric_data
     #########- setters -##############
     def set_vector(self, value: list[int,int]) -> None:

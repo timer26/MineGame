@@ -25,7 +25,8 @@ def render_menu(spacing: int, name_of_section: str, menu_content: list):
         })
 
         forced_position_handler([spacing, top_restriction])
-
+def render_board():
+        pass
 def render_user(render_object: list, sprite: str):
         position_2D = data.get_position_2D()
         line = render_object[position_2D[1]]

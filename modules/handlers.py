@@ -71,13 +71,14 @@ def menu_handler(menu_content: list):
     data.set_vector([0, 0])
     selected_option = data.get_position_2D()[1] - data.get_position_modifier()["y_start"]
     result = user_input_handler()
-
     selected_key = menu_content[selected_option]
-    data.set_metric_data({"Last menu position": data.get_last_menu_position()})
-    data.set_metric_data({"Last menu position": data.get_menu_position()})
-    
+
+    # Metric logging
+    data.set_metric_data({"Last menu position": data.peek_last_menu_position()})
+    data.set_metric_data({"Current menu position": data.get_menu_position()})
+
     if result == "enter":
-        data.set_last_menu_position(data.get_menu_position()) 
+        data.set_last_menu_position(data.get_menu_position())
         data.set_menu_position(selected_key)
         data.get_all_menu_functions()[selected_key]()
 
