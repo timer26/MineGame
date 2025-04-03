@@ -64,12 +64,12 @@ class DataStorage:
 
     def get_last_menu_position(self) -> str:
         if self._last_menu_position:
-            return self._last_menu_position.pop()
+            return self._last_menu_position[-1]
         return "main_menu"
 
-    def peek_last_menu_position(self) -> str:
+    def pop_last_menu_position(self) -> str:
         if self._last_menu_position:
-            return self._last_menu_position[-1]
+            return self._last_menu_position.pop()
         return "main_menu"  
     
     def get_all_menu_functions(self):
