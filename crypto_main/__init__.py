@@ -3,15 +3,21 @@ from .menu import (
     start_game,
     settings,
     end_program
-                ) 
-from crypto_main.data_storage import data
-from crypto_main.metric import metric
+                )
+from crypto_main.data_storage import DataStorage
+from crypto_main.metric import Metric
 
-__all__ =            [
+metric = Metric(DataStorage())
+data = DataStorage(metric)
+metric.set_data_storage(data)
+
+
+__all__ =[
         "data",
         "metric",
         "main_menu",
         "settings",
         "start_game",
         "settings",
+        "end_program",
                     ]

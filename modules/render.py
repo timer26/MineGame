@@ -1,6 +1,5 @@
 from modules import forced_position_handler
-from crypto_main.data_storage import data
-from crypto_main.metric import metric
+from crypto_main.__init__ import data, metric
 import os
 
 def clear_console():
@@ -62,7 +61,7 @@ def final_render(sprite: str):
                         metric_line = ""
 
 
-                padded_line = line.ljust(data.get_position_modifier()["x_max"]+metric_offset)
+                padded_line = line.ljust(data.get_position_modifier()["x_max"] + metric_offset)
                 print(f"{padded_line}{"||- "}{metric_line}")
             
         

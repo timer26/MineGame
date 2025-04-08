@@ -12,7 +12,11 @@ from .render import (
 
 )
 
+from crypto_main import metric, data
+
 __all__ = [
+        "metric",
+        "data",
         "forced_position_handler",
         "menu_handler",
         "user_input_handler",

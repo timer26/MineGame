@@ -1,7 +1,8 @@
 from crypto_main.menu import *
 
 class DataStorage:
-    def __init__(self):
+    def __init__(self, metric = None):
+        self._metric = metric
         self._vector = [0, 0]
         self._position_2D = [0, 0]
         self._rendered_area = []
@@ -36,6 +37,8 @@ class DataStorage:
 
 
 ##########- getters -################
+    def get_metric_data(self):
+        return self._metric.get_metric_data() if self._metric else []
     def get_vector(self):
         return self._vector
     
@@ -63,7 +66,11 @@ class DataStorage:
 
             
     #########- setters -##############
-
+    def set_metric_data(self, value: dict[str, any]):
+        if self._metric:
+            self._metric.set_metric_data(value)
+    def set_metric_instance(self, metric):
+        self._metric = metric
 
     def set_vector(self, value: list[int,int]) -> None:
         self._vector = value
@@ -86,9 +93,4 @@ class DataStorage:
     def set_all_menu_functions(self, value: dict[str, callable]) -> None:
         self._all_menu_functions = value
 
-
-
-
-    
-data = DataStorage()
 
