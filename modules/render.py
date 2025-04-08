@@ -1,5 +1,6 @@
-from modules import forced_position_handler, metric
+from modules import forced_position_handler
 from crypto_main.data_storage import data
+from crypto_main.metric import metric
 import os
 
 def clear_console():
@@ -19,6 +20,7 @@ def render_menu(spacing: int, name_of_section: str, menu_content: list):
                 "x_min": spacing,
                 "x_max": spacing,
                 "y_min": top_restriction,
+                
                 "y_max": range_y,
                 "x_start": spacing,
                 "y_start": top_restriction,

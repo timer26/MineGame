@@ -1,5 +1,5 @@
 from modules import *
-from modules.metric import metric
+from crypto_main.metric import metric
 from crypto_main.data_storage import data
 from pynput import keyboard
 
