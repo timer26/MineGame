@@ -1,5 +1,5 @@
 from modules import forced_position_handler
-from MinesGame.data_storage import data
+from crypto_main.data_storage import data
 import os
 
 def clear_console():

@@ -1,4 +1,4 @@
-from MinesGame.menu import *
+from crypto_main.menu import *
 from collections import  deque
 class DataStorage:
     def __init__(self):
@@ -24,7 +24,8 @@ class DataStorage:
         
         
         self._sprites = {
-                "menu_cursor": " <--",
+                "menu_row_cursor": " ←-",
+                "menu_column_cursor": "↑",
                 "mine" : "Ø",
         }
 
@@ -67,11 +68,6 @@ class DataStorage:
             return self._last_menu_position[-1]
         return "main_menu"
 
-    def pop_last_menu_position(self) -> str:
-        if self._last_menu_position:
-            return self._last_menu_position.pop()
-        return "main_menu"  
-    
     def get_all_menu_functions(self):
         return self._all_menu_functions
 
@@ -105,5 +101,6 @@ class DataStorage:
 
     def set_metric_data(self, value: dict[str, any]) -> None:
         self._metric_data.append(value)
-        
+class Metric:
+    ...
 data = DataStorage()
