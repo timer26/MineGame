@@ -1,5 +1,5 @@
 from crypto_main.menu import *
-from collections import  deque
+
 class DataStorage:
     def __init__(self):
         self._vector = [0, 0]
@@ -19,7 +19,7 @@ class DataStorage:
    
               
         self._menu_position = ""
-        self._last_menu_position = deque()
+        self._last_menu_position = ["main_menu"]
         self._all_menu_functions = {}
         
         
@@ -31,19 +31,7 @@ class DataStorage:
 
 
 
-        self._metric_data =   []
 
-
-    def _generate_default_metric_data(self):
-        return [
-                {"Current vector 2D": self._vector},
-                {"Current position 2D": self._position_2D},
-                {"Minimum X , Y": (self._position_modifier["x_min"], self._position_modifier["y_min"])},
-                {"Maximum X , Y": (self._position_modifier["x_max"], self._position_modifier["y_max"])},
-                {"Forced X , Y":  (self._position_modifier["x_start"], self._position_modifier["y_start"])},
-        ]
-    def clear_metric_data(self):
-        self._metric_data = self._generate_default_metric_data()
 
 
 
@@ -57,27 +45,26 @@ class DataStorage:
     def get_position_modifier(self):
         return self._position_modifier
     
-    def get_position_2D(self):
+    def get_position_2D(self)->list:
         return self._position_2D
     
     def get_menu_position(self):
         return self._menu_position
 
     def get_last_menu_position(self) -> str:
-        if self._last_menu_position:
-            return self._last_menu_position[-1]
-        return "main_menu"
+        return self._menu_position
 
     def get_all_menu_functions(self):
         return self._all_menu_functions
 
-    def get_sprites(self)->str:
+    def get_sprites(self)->dict:
         return self._sprites
     
-    def get_metric_data(self)->list[dict]:
-        return self._metric_data
+
             
     #########- setters -##############
+
+
     def set_vector(self, value: list[int,int]) -> None:
         self._vector = value
 
@@ -99,8 +86,9 @@ class DataStorage:
     def set_all_menu_functions(self, value: dict[str, callable]) -> None:
         self._all_menu_functions = value
 
-    def set_metric_data(self, value: dict[str, any]) -> None:
-        self._metric_data.append(value)
-class Metric:
-    ...
+
+
+
+    
 data = DataStorage()
+

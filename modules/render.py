@@ -1,4 +1,4 @@
-from modules import forced_position_handler
+from modules import forced_position_handler, metric
 from crypto_main.data_storage import data
 import os
 
@@ -45,7 +45,8 @@ def final_render(sprite: str):
         rendered_lines = data.get_rendered_area().copy()
         rendered_with_cursor = render_user(rendered_lines, data.get_sprites()[sprite])
 
-        metric_data = data.get_metric_data()
+        metric_data = metric.get_metric_data()
+
         max_lines = max(len(rendered_with_cursor), len(metric_data))
 
         for i in range(max_lines):
@@ -54,12 +55,12 @@ def final_render(sprite: str):
                 if i < len(metric_data):
                         metric_dict = metric_data[i]
                         key, value = list(metric_dict.items())[0]
-                        metric = f"{key} : {value}"
+                        metric_line = f"{key} : {value}"
                 else:
-                        metric = ""
+                        metric_line = ""
 
 
                 padded_line = line.ljust(data.get_position_modifier()["x_max"]+metric_offset)
-                print(f"{padded_line}{"||- "}{metric}")
+                print(f"{padded_line}{"||- "}{metric_line}")
             
-        data.clear_metric_data()
+        

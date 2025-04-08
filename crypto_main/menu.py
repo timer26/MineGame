@@ -16,12 +16,11 @@ def run_menu(menu_content: list, spacing: int, name_of_section: str):
         menu_handler(menu_content=menu_content)
 # menu functions----------------------------------------------------
 def back()->None:
-    last_menu_key = data.last_menu_position()
-    data.set_menu_position(last_menu_key)
-    data.get_all_menu_functions()[last_menu_key]()
+    data.set_menu_position(data.get_last_menu_position())
 
 
 def difficulty_setter() -> None:
+    data.set_menu_position("main_menu")
     pass
 
 
