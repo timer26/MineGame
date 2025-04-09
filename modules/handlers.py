@@ -1,5 +1,6 @@
 from modules import *
-from crypto_main.__init__ import data, metric
+from crypto_main.metric import metric
+from crypto_main.data_storage import data
 from pynput import keyboard
 
 def user_input_handler() -> str:

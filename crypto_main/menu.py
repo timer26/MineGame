@@ -1,7 +1,7 @@
 import time
 
 from modules import render_menu, menu_handler,final_render
-from crypto_main.__init__ import data
+from crypto_main.data_storage import data
 
 
 
