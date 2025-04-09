@@ -1,4 +1,4 @@
-from crypto_main import main_menu
+from MinesGame import main_menu
 
 
 
