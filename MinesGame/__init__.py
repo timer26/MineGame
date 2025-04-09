@@ -2,9 +2,9 @@ from .menu import (
     main_menu,
     start_game,
     settings,
-    end_program
+    end_game
                 ) 
-from crypto_main.data_storage import data
+from MinesGame.data_storage import data
 
 __all__ =            [
         "data",

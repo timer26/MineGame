@@ -1,5 +1,7 @@
+import time
+
 from modules import *
-from crypto_main.data_storage import data
+from MinesGame.data_storage import data
 from pynput import keyboard
 
 def user_input_handler() -> str:
@@ -70,11 +72,9 @@ def menu_handler(menu_content: list):
     result = user_input_handler()
     selected_key = menu_content[selected_option]
 
-
     data.set_metric_data({"Current menu": data.get_menu_position()})
     data.set_metric_data({"Previous menu": data.get_last_menu_position()})
     data.set_metric_data({"Menu stack": list(data._last_menu_position)})
-    
     if result == "enter":
         current_menu = data.get_menu_position()
         data.set_last_menu_position(current_menu)  # Push current menu to stack
