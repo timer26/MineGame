@@ -19,7 +19,7 @@ class DataStorage:
    
               
         self._menu_position = ""
-        self._last_menu_position = deque()
+        self._last_menu_position = ["main_menu"]
         self._all_menu_functions = {}
         
         
