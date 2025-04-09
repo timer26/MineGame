@@ -4,7 +4,6 @@ from .handlers import (
     forced_position_handler,
     menu_handler,
 )
-from modules.metric import metric
 
 from .render import (
     render_menu,
